@@ -1,0 +1,24 @@
+{
+  "name": "bmd-videohub-controlpanel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "manufacturer": "Blackmagic Design",
+  "product": "Videohub Control Panel",
+  "shortname": "Videohub Control",
+  "keywords": [
+    "Matrix"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Stevens",
+  "license": "MIT",
+  "dependencies": {
+    "http-shutdown": "^1.2.2",
+    "http-terminator": "^3.0.0",
+    "portfinder": "^1.0.28",
+    "server-destroy": "^1.0.1",
+    "tcp-ping": "^0.1.1"
+  }
+}
