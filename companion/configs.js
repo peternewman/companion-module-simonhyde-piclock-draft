@@ -35,7 +35,7 @@ module.exports = {
 				id: 'companionPort',
 				label: 'Companion Instance Port',
 				width: 6,
-				default: '8000',
+				default: '8888',
 				regex: this.REGEX_PORT
 			},
 			{
