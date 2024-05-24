@@ -1,49 +1,50 @@
-var configurator = require('../configurator');
+var configurator = require('../configurator')
 
 module.exports = {
 	initActions() {
 		const actions = {
-			'flash': {
+			flash: {
 				label: 'Flash Controller',
-				options: []
+				options: [],
 			},
-			'unlock': {
+			unlock: {
 				label: 'Unlock Controller',
-				options: []
+				options: [],
 			},
-			'lock': {
+			lock: {
 				label: 'Lock Controller',
-				options: []
+				options: [],
 			},
-			'sendConfig': {
+			sendConfig: {
 				label: 'Send Config To Controller',
-				options: []
-			}
-		};
-	
-		this.setActions(actions);
+				options: [],
+			},
+		}
+
+		this.setActions(actions)
 	},
-	
+
 	action(action) {
 		if (this.config.controllerIP) {
-	
 			switch (action.action) {
 				case 'flash':
-					console.log("Flashing");
-					break;
+					console.log('Flashing')
+					break
 				case 'sendConfig':
-					console.log("Unlocking");
+					console.log('Unlocking')
 					try {
-						configurator.setButtonTypeSource(this.config.controllerIP);
+						configurator.setButtonTypeSource(this.config.controllerIP)
 					} catch (error) {
-						this.log('error', 'There was an error sending the configuration to the device. Are you alredy connected to it with VideoHub Hardware Configuration Software?')
+						this.log(
+							'error',
+							'There was an error sending the configuration to the device. Are you alredy connected to it with VideoHub Hardware Configuration Software?'
+						)
 					}
-					break;
+					break
 				case 'lock':
-					console.log("locking");
-					break;
+					console.log('locking')
+					break
 			}
-
 		}
-	}	
+	},
 }

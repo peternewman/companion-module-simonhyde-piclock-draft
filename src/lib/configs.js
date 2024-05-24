@@ -24,11 +24,13 @@ module.exports = {
 	INTERFACE_LOCKS_PROCESS: 15,
 
 	models: {
-		1: { // micro vh
-			name: "Blackmagic Micro Videohub"
+		1: {
+			// micro vh
+			name: 'Blackmagic Micro Videohub',
 		},
-		2: { // smart vh
-			name: "Blackmagic Smart Videohub",
+		2: {
+			// smart vh
+			name: 'Blackmagic Smart Videohub',
 			1: 41, // input labels
 			2: 1, // output labels
 			3: 0, // monitor labels
@@ -43,8 +45,8 @@ module.exports = {
 			12: 0, // monitor locks
 			13: 0, // serial locks
 			14: 0, // frame locks
-			15: 0 // process locks
-		}
+			15: 0, // process locks
+		},
 	},
 
 	blockTitlesDecode: {
@@ -62,7 +64,7 @@ module.exports = {
 		'MONITORING OUTPUT LOCKS:': 12,
 		'SERIAL PORT LOCKS:': 13,
 		'PROCESSING UNIT LOCKS:': 14,
-		'FRAME BUFFER LOCKS:': 15
+		'FRAME BUFFER LOCKS:': 15,
 	},
 
 	blockTitlesEncode: {
@@ -80,24 +82,8 @@ module.exports = {
 		12: 'MONITORING OUTPUT LOCKS:',
 		13: 'SERIAL PORT LOCKS:',
 		14: 'PROCESSING UNIT LOCKS:',
-		15: 'FRAME BUFFER LOCKS:'
+		15: 'FRAME BUFFER LOCKS:',
 	},
 
-	emptyUpdate: [
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[]
-	]
+	emptyUpdate: [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []],
 }

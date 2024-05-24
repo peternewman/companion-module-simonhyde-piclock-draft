@@ -1,27 +1,39 @@
 {
-  "name": "simonhyde-piclock",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "manufacturer": "Simon Hyde",
-  "product": "PiClock",
-  "shortname": "PiClock",
-  "keywords": [
-    "Clock"
-  ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Peter Newman",
-  "contributors": [
-    "David Stevens"
-  ],
-  "license": "MIT",
-  "dependencies": {
-    "http-shutdown": "^1.2.2",
-    "http-terminator": "^3.0.0",
-    "portfinder": "^1.0.28",
-    "server-destroy": "^1.0.1",
-    "tcp-ping": "^0.1.1"
-  }
+	"name": "simonhyde-piclock",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"manufacturer": "Simon Hyde",
+	"product": "PiClock",
+	"shortname": "PiClock",
+	"keywords": [
+		"Clock"
+	],
+	"scripts": {
+		"format": "prettier -w .",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Peter Newman",
+	"contributors": [
+		"David Stevens"
+	],
+	"license": "MIT",
+	"dependencies": {
+		"http-shutdown": "^1.2.2",
+		"http-terminator": "^3.0.0",
+		"portfinder": "^1.0.28",
+		"server-destroy": "^1.0.1",
+		"tcp-ping": "^0.1.1"
+	},
+	"prettier": "@companion-module/tools/.prettierrc.json",
+	"devDependencies": {
+		"@companion-module/tools": "^1.2.1"
+	},
+	"bugs": {
+		"url": "https://github.com/bitfocus/companion-module-simonhyde-piclock/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bitfocus/companion-module-simonhyde-piclock.git"
+	}
 }
