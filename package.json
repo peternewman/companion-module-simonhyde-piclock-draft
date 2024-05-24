@@ -1,18 +1,21 @@
 {
-  "name": "bmd-videohub-controlpanel",
+  "name": "simonhyde-piclock",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "manufacturer": "Blackmagic Design",
-  "product": "Videohub Control Panel",
-  "shortname": "Videohub Control",
+  "manufacturer": "Simon Hyde",
+  "product": "PiClock",
+  "shortname": "PiClock",
   "keywords": [
-    "Matrix"
+    "Clock"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "David Stevens",
+  "author": "Peter Newman",
+  "contributors": [
+    "David Stevens"
+  ],
   "license": "MIT",
   "dependencies": {
     "http-shutdown": "^1.2.2",
