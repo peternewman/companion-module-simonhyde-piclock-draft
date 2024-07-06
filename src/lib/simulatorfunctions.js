@@ -1,11 +1,9 @@
-const { companionCommander } = require('../commander.js')
-const { TYPE_SMART_VIDEOHUB } = require('./configs.js')
-var videohub = require('./videohub.js')
-var v = new videohub.videohub(TYPE_SMART_VIDEOHUB)
 var indexfile = require('../../index')
 
 function handleSocketData(data) {
-	this.data += data.toString()
+	console.log('Got data: ' + data.toString())
+
+	//this.data += data.toString()
 	var blocks = this.data.split('\n\n')
 
 	// process blocks
@@ -19,48 +17,6 @@ function handleSocketData(data) {
 				lines.splice(0, 1)
 			if (lines[0] == 'PING:') {
 				this.write('ACK\n\n')
-			} else if (typeof videohub.blockTitlesDecode[lines[0]] != 'undefined') {
-				// this block header is recognized
-				var inf = videohub.blockTitlesDecode[lines[0]]
-				if (lines.length == 1) {
-					// this is a status request block
-					var statusBlock = generateStatusBlock(this, inf)
-					if (statusBlock) {
-						this.write('ACK\n\n')
-						this.write(statusBlock)
-					}
-				} else {
-					// this is an update block
-					lines.splice(0, 1)
-					var hasFailed = false
-					for (l in lines) {
-						// handle the updates
-						var tl = lines[l]
-						var firstSpace = tl.indexOf(' ')
-						var index = parseInt(tl.substr(0, firstSpace))
-						var value = tl.substr(firstSpace + 1)
-						var validUpdate = v.queueUpdate(inf, index, value)
-						console.log(value)
-
-						companionCommander(value)
-
-						if (!validUpdate) break
-					}
-					if (validUpdate) {
-						this.write('ACK\n\n')
-						v.doUpdate()
-
-						// reset the LED
-						var index = 0
-						var value = 40
-						v.queueUpdate(inf, index, value)
-						this.write('ACK\n\n')
-						v.doUpdate()
-					} else {
-						this.write('NAK\n\n')
-						v.clearUpdates()
-					}
-				}
 			} else {
 				// the block header given is unimplemented or non-standard
 				// and should be ignored (according to spec)
@@ -70,39 +26,64 @@ function handleSocketData(data) {
 	}
 }
 
-function sendClientUpdate(update) {
-	// build the update message
-	var output = ''
-	for (var i = 0; i < 15; i++) {
-		// iterate through all the updated interfaces
-		if (update[i].length == 0) continue
-		var inf = i + 1
-		output += videohub.blockTitlesEncode[inf] + '\n'
-		for (var n = 0; n < v.getInterfaceCount(inf); n++) {
-			// iterate through each port
-			if (typeof update[i][n] != 'undefined') output += n + ' ' + v.getInterfacePort(inf, n) + '\n'
-		}
-		output += '\n'
-	}
-
+function sendRawClientMessage(self, message) {
 	// send it to all the clients
-	for (s in sockets) {
-		sockets[s].write(output)
+	console.log('Sending: ' + message)
+	//console.log(JSON.stringify(self))
+	//console.log(JSON.stringify(self.sim.Simulator))
+	console.log('Got ' + self.sim.Simulator.sockets.size + ' sockets')
+	for (const s of self.sim.Simulator.sockets.keys()) {
+		console.log(JSON.stringify(s))
+		console.log('Sent to :' + s)
+		s.write(message + '\r')
 	}
+	console.log('Done sending')
 }
 
-function generateStatusBlock(socket, inf) {
-	if (!v.getInterfaceCount(inf)) return false
-	var output = videohub.blockTitlesEncode[inf] + '\n'
-	for (var p = 0; p < v.getInterfaceCount(inf); p++) {
-		output += p + ' ' + v.getInterfacePort(inf, p) + '\n'
+function updateData(self, command, update) {
+	self.log('debug', 'Pre Data: ' + JSON.stringify(self.sim.Simulator.data))
+	self.log('debug', 'Data: ' + JSON.stringify(update))
+	for (const opt of Object.keys(update)) {
+		self.log('debug', 'Checking option:' + opt + ' (' + update[opt] + ')')
+		for (var prop of self.sim.Simulator.data[command]) {
+			self.log('debug', 'Looking at: ' + JSON.stringify(prop))
+			self.log('debug', 'Looking at: ' + prop['id'] + ' = ' + prop['value'])
+			if (opt === prop['id']) {
+				prop['value'] = update[opt]
+				self.log('debug', 'New: ' + prop['id'] + ' = ' + prop['value'])
+				break // We've updated, stop searching
+			}
+		}
 	}
-	output += '\n'
-	return output
+	//self.sim.Simulator.data['SETGLOBAL']['landscape'] = action.options['landscape']
+	self.log('debug', 'Post data: ' + JSON.stringify(self.sim.Simulator.data))
+	//await self.sim.Simulator.sendRawClientMessage(self, action.options['cmd'])
+}
+
+function sendGlobalCommand(self, command) {
+	self.log('debug', 'Sending: ' + command)
+	self.log('debug', 'Data: ' + JSON.stringify(self.sim.Simulator.data))
+	var message =
+		command +
+		':' +
+		self.sim.Simulator.data[command]
+			.map((opt) => {
+				return opt['value']
+			})
+			.join(':')
+	self.log('debug', 'Msg: ' + message)
+	sendRawClientMessage(self, message)
+}
+
+function updateSendGlobalData(self, command, update) {
+	updateData(self, command, update)
+	sendGlobalCommand(self, command)
 }
 
 module.exports = {
 	handleSocketData,
-	generateStatusBlock,
-	sendClientUpdate,
+	sendRawClientMessage,
+	updateData,
+	sendGlobalCommand,
+	updateSendGlobalData,
 }
