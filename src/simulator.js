@@ -15,6 +15,18 @@ var Simulator = (function () {
 		],
 		SETPROFILE: [{ id: 'name', value: '' }],
 		SETREGIONCOUNT: [{ id: 'count', value: 1 }],
+		// Below are all regional commands
+		SETLAYOUT: [
+			{ id: 'analogue_clock', value: 1 },
+			{ id: 'analogue_clock_local', value: 1 },
+			{ id: 'digital_clock_utc', value: 0 },
+			{ id: 'digital_clock_local', value: 1 },
+			{ id: 'date', value: 1 },
+			{ id: 'date_local', value: 1 },
+			{ id: 'blank', value: '' }, // Legacy field for backwards compatibility
+			{ id: 'numbers_present', value: 1 },
+			{ id: 'numbers_outside', value: 1 },
+		],
 	}
 
 	function handleConnection(socket) {

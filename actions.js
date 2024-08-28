@@ -86,6 +86,118 @@ module.exports = {
 					await self.sim.Simulator.updateSendGlobalData(self, 'SETREGIONCOUNT', action.options)
 				},
 			},
+			setAnalogueClock: {
+				name: 'Set Analogue Clock',
+				options: [
+					{
+						type: 'dropdown',
+						label: 'Analogue Clock',
+						id: 'analogue_clock',
+						choices: [
+							{ id: 1, label: 'On' },
+							{ id: 0, label: 'Off' },
+						],
+						default: 1,
+					},
+					{
+						type: 'dropdown',
+						label: 'Analogue Clock Local',
+						id: 'analogue_clock_local',
+						choices: [
+							{ id: 1, label: 'Yes' },
+							{ id: 0, label: 'No' },
+						],
+						default: 1,
+					},
+					{
+						type: 'dropdown',
+						label: 'Analogue Clock Numbers Present',
+						id: 'numbers_present',
+						choices: [
+							{ id: 1, label: 'Yes' },
+							{ id: 0, label: 'No' },
+						],
+						default: 1,
+					},
+					{
+						type: 'dropdown',
+						label: 'Analogue Clock Numbers Location',
+						id: 'numbers_outside',
+						choices: [
+							{ id: 1, label: 'Outside' },
+							{ id: 0, label: 'Inside' },
+						],
+						default: 1,
+					},
+				],
+				callback: async (action) => {
+					await self.sim.Simulator.updateSendGlobalData(self, 'SETLAYOUT', action.options)
+				},
+			},
+			setDigitalClockUtc: {
+				name: 'Set Digital Clock UTC',
+				options: [
+					{
+						type: 'dropdown',
+						label: 'Digital Clock UTC',
+						id: 'digital_clock_utc',
+						choices: [
+							{ id: 1, label: 'On' },
+							{ id: 0, label: 'Off' },
+						],
+						default: 0,
+					},
+				],
+				callback: async (action) => {
+					await self.sim.Simulator.updateSendGlobalData(self, 'SETLAYOUT', action.options)
+				},
+			},
+			setDigitalClockLocal: {
+				name: 'Set Digital Clock Local',
+				options: [
+					{
+						type: 'dropdown',
+						label: 'Digital Clock Local',
+						id: 'digital_clock_local',
+						choices: [
+							{ id: 1, label: 'On' },
+							{ id: 0, label: 'Off' },
+						],
+						default: 1,
+					},
+				],
+				callback: async (action) => {
+					await self.sim.Simulator.updateSendGlobalData(self, 'SETLAYOUT', action.options)
+				},
+			},
+			setDate: {
+				name: 'Set Date',
+				options: [
+					{
+						type: 'dropdown',
+						label: 'Date',
+						id: 'date',
+						choices: [
+							{ id: 1, label: 'On' },
+							{ id: 0, label: 'Off' },
+						],
+						default: 1,
+					},
+					{
+						type: 'dropdown',
+						label: 'Date Local',
+						id: 'date_local',
+						choices: [
+							{ id: 1, label: 'Yes' },
+							{ id: 0, label: 'No' },
+						],
+						default: 1,
+					},
+				],
+				callback: async (action) => {
+					await self.sim.Simulator.updateSendGlobalData(self, 'SETLAYOUT', action.options)
+				},
+			},
 		}
 
 		this.setActionDefinitions(actions)
