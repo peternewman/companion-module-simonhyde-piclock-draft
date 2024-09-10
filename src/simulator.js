@@ -33,6 +33,7 @@ var Simulator = (function () {
 		var address = socket.remoteAddress.split('::ffff:')[1]
 		console.log('Connection from: ' + address)
 
+		// TODO(Peter): Make this a better test - connection ID or something?
 		var auth = 'CRYPT:12345\r'
 		socket.write(auth)
 		console.log('Sent: ' + auth)

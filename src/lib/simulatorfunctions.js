@@ -9,7 +9,6 @@ function handleSocketData(data) {
 	// process blocks
 	if (indexfile.serverIsActive == true) {
 		while (blocks.length > 1) {
-			// block is a update request block
 			var block = blocks.splice(0, 1)
 			var lines = block[0].split('\n')
 			if (lines[0] == '')
@@ -19,7 +18,6 @@ function handleSocketData(data) {
 				this.write('ACK\n\n')
 			} else {
 				// the block header given is unimplemented or non-standard
-				// and should be ignored (according to spec)
 			}
 		}
 		this.data = blocks[0]
@@ -55,7 +53,6 @@ function updateData(self, command, update) {
 			}
 		}
 	}
-	//self.sim.Simulator.data['SETGLOBAL']['landscape'] = action.options['landscape']
 	self.log('debug', 'Post data: ' + JSON.stringify(self.sim.Simulator.data))
 	//await self.sim.Simulator.sendRawClientMessage(self, action.options['cmd'])
 }

@@ -1,6 +1,3 @@
-//var simfunc = require('./src/lib/simulatorfunctions')
-//const sim = require('./src/simulator')
-
 module.exports = {
 	initActions(self) {
 		const actions = {
