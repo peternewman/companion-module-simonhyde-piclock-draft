@@ -1,21 +1,31 @@
-## BMD-VideoHub-ControlPanel
+## companion-module-simonhyde-piclock
 
-This module allows you to control companion using the elgato Smart VideoHub Control Panel
+This module allows you to control [Simon Hyde's PiClock](https://github.com/simonhyde/PiClock) using Companion
 
 ### Configuration
 
-- The control panel must be confitured with every key as an input map with key one being source 1, key 2 being source 2, key 3 being source 3, and so on until you get to key 40 being source 40.
-- Put the IP of the control panel in the config.
-- Put the IP and port of the desination companion computer in the config.
+- Setup the PiClock config to suit
+  - Set the `tally_mode` to one of the TCP/IP options
+  - Set the `tally_remote_host` to the IP of the Companion computer
 
-#### Static Network Configuration (optional)
+### Actions
 
-- For better performance and reliability, it is recommended that you assign the control panel a static IP address. One way to accomplish this is to make a DHCP reservation on your home router or DHCP server.
+- Orientation - Landscape/Portrait
+- Screensaver
+- Analogue clock
+  - On/Off
+  - Local
+  - Numbers
+  - Numbers location
+- Digital UTC clock
+- Digital local clock
+- Date
+  - On/off
+  - Local
 
-### To use the module
+### To Do
 
-- Use the drop down fields to assign the control panel keys to the corresponding companion keys that you would like to control.
-
-### Tested Devices
-
-- BlackMagic VideoHub Smart Control Panel
+- Support tally protocol shared secrets
+- Allow the port to be set
+- Region support
+- Tally support
